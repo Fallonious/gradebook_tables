@@ -1,0 +1,38 @@
+<%= form_for(@student) do |f| %>
+<% if @student.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@student.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+  <ul>
+    <% @student.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+
+<div class="field">
+  <%= f.label :name %><br>
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :student_email %><br>
+  <%= f.text_field :student_email %>
+</div>
+<div class="field">
+  <%= f.label :password %><br>
+  <%= f.text_field :password %>
+</div>
+
+<div class="field">
+  <%= f.label "Assign to teacher:" %><br>
+  <%= f.select :teacher_id, options_for_select(Teacher.classes), include_blank: true %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+<%= link_to 'Delete this item', @student, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+<% end %>

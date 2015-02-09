@@ -1,0 +1,18 @@
+<h1>Parent Dashboard</h1>
+
+
+<table>
+  <tbody>
+    <tr><td>
+      <% parent = Parent.find_by_id(session[:parent_id]) %>
+      <%= parent.child_name %></td></tr>
+      <% student = Student.find_by(name: parent.child_name ) %>
+      <% if student %>
+        <% grade = Grade.get_assignments_for_student_email( student.student_email ) %>
+        <%= display_grades(grade) %>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Change your password', edit_parent_path(Parent.find_by(id: session[:parent_id] )) %>

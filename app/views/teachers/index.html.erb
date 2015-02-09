@@ -1,0 +1,28 @@
+<h1>Teacher Dashboard</h1>
+
+<%= link_to 'Create new grade', new_grade_path %><br><br>
+
+<table>
+  <tbody>
+      <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+        <tr><td><%=  student.name  %></td></tr>
+        <tr>
+          <% Grade.get_assignments_for_student_email( student.student_email ).each do |grade| %>
+            <tr>
+              <td><%= grade.assignment_name %></td>
+              <td><%= grade.score %></td>
+              <td><%= grade.due_on %></td>
+              <td><%= link_to 'Edit', edit_grade_path(grade) %></td>
+              <td><%= link_to 'Destroy', grade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tr>
+      <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Create new teacher', new_teacher_path %><br>
+<%= link_to 'Create new student', new_student_path %><br>
+<%= link_to 'Create new parent', new_parent_path %><br>
+
+<%= link_to 'Change your password', edit_teacher_path(Teacher.find_by(id: session[:teacher_id] )) %>

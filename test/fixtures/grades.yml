@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student_email: MyString
+  assignment_name: MyString
+  due_on: 2015-02-05
+  score: 1
+
+two:
+  student_email: MyString
+  assignment_name: MyString
+  due_on: 2015-02-05
+  score: 1
