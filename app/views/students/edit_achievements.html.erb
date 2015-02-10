@@ -1,0 +1,14 @@
+<h1>Edit Achievements for <%= @student.name %></h1>
+
+<%= form_tag update_achievements_student_path do %>
+<ul>
+  <% @achievements.each do |a| %>
+  <li>
+    <%= check_box_tag "achievements[#{a.id}]", true, @student.achievements.include?(a) %>
+    <%= a.name %>
+  </li>
+  <% end %>
+</ul>
+
+<%= submit_tag "Save" %>
+<% end %>

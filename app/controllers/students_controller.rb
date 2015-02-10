@@ -2,13 +2,26 @@ class StudentsController < ApplicationController
   before_action :check_logged_in
 
   def index
-    @student = Student.all
+    @students = Student.all
     @achievements = Achievement.all
   end
 
-  def edit_student_achievements
-
+  def edit_achievements
+    @student = Student.find(params[:id])
+    @achievements = Achievement.all
   end
+
+
+
+  def update_achievements
+    @student = Student.find(params[:id])
+    @student.achievements = []
+    params[:achievements].keys.each do |a|
+      @student.achievements << Achievement.find(a)
+    end
+    redirect_to edit_achievements_student_path, notice: "student's achievements were updated"
+  end
+
 
   def new
     @student = Student.new
@@ -30,7 +43,13 @@ class StudentsController < ApplicationController
     end
   end
 
+
   def update
+    if @student.update(student_params)
+      redirect_to @student, notice: "Student was updated."
+    else
+      render :edit
+    end
   end
 
   def show
