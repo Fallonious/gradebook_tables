@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  achievement_id,: MyString
+  student_id: MyString
+
+two:
+  achievement_id,: MyString
+  student_id: MyString

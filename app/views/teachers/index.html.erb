@@ -1,19 +1,19 @@
 <h1>Teacher Dashboard</h1>
 
-<%= link_to 'Create new grade', new_grade_path %><br><br>
+<%= link_to 'Create new achievement', new_achievement_path %><br><br>
 
 <table>
   <tbody>
-      <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+      <% @teachers_students.each do |student| %>
         <tr><td><%=  student.name  %></td></tr>
         <tr>
-          <% Grade.get_assignments_for_student_email( student.student_email ).each do |grade| %>
+          <% @achievements.each do |achievement| %>
             <tr>
-              <td><%= grade.assignment_name %></td>
-              <td><%= grade.score %></td>
-              <td><%= grade.due_on %></td>
-              <td><%= link_to 'Edit', edit_grade_path(grade) %></td>
-              <td><%= link_to 'Destroy', grade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td><%= achievement.name %></td>
+              <td><%= achievement.point_value %></td>
+              <td><%= achievement.date_on %></td>
+              <td><%= link_to 'Edit', edit_achievement_path(achievement) %></td>
+              <td><%= link_to 'Destroy', achievement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
         </tr>

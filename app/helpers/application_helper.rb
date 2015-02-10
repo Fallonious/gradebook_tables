@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def title
-    base_title = "School Gradebook"
+    base_title = "School Achievementbook"
     if @title.nil?
       base_title
     else
@@ -9,13 +9,13 @@ module ApplicationHelper
     end
   end
 
-  def display_grades(grades)
+  def display_achievements(achivements)
     result = ""
-    grades.each do |grade|
+    achievements.each do |achievement|
       result << "<tr>"
-      result << "<td>#{grade.assignment_name}</td>"
-      result << "<td>#{ grade.score }</td>"
-      result << "<td>#{ grade.due_on}</td>"
+      result << "<td>#{achivement.assignment_name}</td>"
+      result << "<td>#{ achivement.score }</td>"
+      result << "<td>#{ achivement.date_on}</td>"
       result << "</tr>"
     end
     result.html_safe

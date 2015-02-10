@@ -1,15 +1,31 @@
 Rails.application.routes.draw do
 
+  resources :achievements do
+    member do
+      get 'edit_students'
+
+      post 'edit_students'
+      post 'update_students'
+    end
+    collection do
+      get 'dashboard'
+    end
+  end
+
+
+
   get 'login/login'
   post 'login/login'
 
   post 'login/logout'
   get 'login/logout'
 
+
+
   post 'login/changepassword'
   get 'login/changepassword'
 
-  resources :grades
+  resources :achievements
   resources :parents
   resources :teachers
   resources :students

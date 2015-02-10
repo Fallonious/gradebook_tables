@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AchievementTest < ActiveSupport::TestCase
+class JoinTableAchievementsStudentTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

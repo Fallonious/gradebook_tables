@@ -8,8 +8,8 @@
       <%= parent.child_name %></td></tr>
       <% student = Student.find_by(name: parent.child_name ) %>
       <% if student %>
-        <% grade = Grade.get_assignments_for_student_email( student.student_email ) %>
-        <%= display_grades(grade) %>
+        <% achievement = Achievement.get_assignments_for_student_email( student.student_email ) %>
+        <%= display_achievements(achievement) %>
       <% end %>
     </tr>
   </tbody>

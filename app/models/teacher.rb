@@ -10,4 +10,16 @@ class Teacher < ActiveRecord::Base
     return classes
   end
 
+
+  def get_all_children_for_teacher_id( teacher_id )
+    teachers_children = []
+
+    self.all.each do |student|
+      if student.teacher_id == teacher_id
+        teachers_children << student
+      end
+    end
+    return teachers_children
+  end
+
 end

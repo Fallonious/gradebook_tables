@@ -7,9 +7,9 @@ Migrating to CreateTeachers (20150205200430)
   [1m[35m (0.4ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password_digest" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
   [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150205200430"]]
   [1m[35m (0.6ms)[0m  commit transaction
-Migrating to CreateGrades (20150205200537)
+Migrating to CreateAchievements (20150205200537)
   [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.2ms)[0m  CREATE TABLE "grades" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "student_email" varchar, "assignment_name" varchar, "due_on" date, "score" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[35m (0.2ms)[0m  CREATE TABLE "achievements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "student_email" varchar, "assignment_name" varchar, "due_on" date, "score" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
   [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150205200537"]]
   [1m[35m (0.6ms)[0m  commit transaction
 Migrating to CreateStudents (20150205200621)
@@ -56,7 +56,7 @@ Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for 
 Started GET "/assets/turbolinks-da8ddad9c2c5483d4c5c30c1ce325253.js?body=1" for ::1 at 2015-02-09 15:13:26 -0500
 
 
-Started GET "/assets/grades-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 15:13:26 -0500
+Started GET "/assets/achievements-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 15:13:26 -0500
 
 
 Started GET "/assets/teachers-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 15:13:26 -0500
@@ -72,8 +72,8 @@ Started GET "/assets/application-e0915e1eb4c59ce700a2ef8fe932c748.js?body=1" for
 
 
 Started GET "/assets/students-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 15:13:26 -0500
-  [1m[36mGrade Load (0.7ms)[0m  [1mSELECT "grades".* FROM "grades"[0m
-SQLite3::SQLException: no such table: grades: SELECT "grades".* FROM "grades"
+  [1m[36mAchievement Load (0.7ms)[0m  [1mSELECT "achievements".* FROM "achievements"[0m
+SQLite3::SQLException: no such table: achievements: SELECT "achievements".* FROM "achievements"
   [1m[36m (0.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
   [1m[35m (0.1ms)[0m  select sqlite_version(*)
   [1m[36m (0.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
@@ -83,9 +83,9 @@ Migrating to CreateTeachers (20150205200430)
   [1m[35m (0.4ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password_digest" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
   [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150205200430"]]
   [1m[35m (0.6ms)[0m  commit transaction
-Migrating to CreateGrades (20150205200537)
+Migrating to CreateAchievements (20150205200537)
   [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
-  [1m[35m (0.5ms)[0m  CREATE TABLE "grades" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "student_email" varchar, "assignment_name" varchar, "due_on" date, "score" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[35m (0.5ms)[0m  CREATE TABLE "achievements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "student_email" varchar, "assignment_name" varchar, "due_on" date, "score" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
   [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150205200537"]]
   [1m[35m (0.8ms)[0m  commit transaction
 Migrating to CreateStudents (20150205200621)
@@ -105,3 +105,2273 @@ Migrating to Createpasswords (20150205223042)
   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150205223042"]]
   [1m[36m (6.9ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateAchievements (20150209211758)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "achievements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "date_on" date, "point_value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150209211758"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+SQLite3::CorruptException: database disk image is malformed:           SELECT name
+          FROM sqlite_master
+          WHERE (type = 'table' OR type = 'view') AND NOT name = 'sqlite_sequence'
+ AND name = "schema_migrations"
+SQLite3::CorruptException: database disk image is malformed:           SELECT name
+          FROM sqlite_master
+          WHERE (type = 'table' OR type = 'view') AND NOT name = 'sqlite_sequence'
+ AND name = "schema_migrations"
+  [1m[36m (1.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (3.4ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateTeachers (20150205200430)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password_digest" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150205200430"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+Migrating to CreateAchievements (20150205200537)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  CREATE TABLE "achievements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "student_email" varchar, "assignment_name" varchar, "due_on" date, "score" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (1.0ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150205200537"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+Migrating to CreateStudents (20150205200621)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (2.5ms)[0m  CREATE TABLE "students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "student_email" varchar, "teacher_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150205200621"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to CreateParents (20150205200651)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (2.0ms)[0m  CREATE TABLE "parents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "child_name" varchar, "teacher_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150205200651"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to Createpasswords (20150205223042)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  ALTER TABLE "students" ADD "password_digest" varchar
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "parents" ADD "password_digest" varchar[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150205223042"]]
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAchievements (20150209211758)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (1.7ms)[0m  [1mCREATE TABLE "achievements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "date_on" date, "point_value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150209211758"]]
+  [1m[36m (1.2ms)[0m  [1mcommit transaction[0m
+Migrating to CreateJoinTableAchievementsStudents (20150209213433)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "achievements_students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "achievement_id" varchar, "student_id" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150209213433"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.9ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "teachers" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Susan Smith"], ["email", "SusanSmith@higher.edu"], ["password_digest", "$2a$10$d3CNe4VzSTaojBSUvrcLd.q0Es/d4F4oo2JkPOoAEXQslCHdUENL2"], ["created_at", "2015-02-09 21:44:07.070422"], ["updated_at", "2015-02-09 21:44:07.070422"]]
+  [1m[35m (1.2ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "teachers" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Tom Teacher"], ["email", "TomTeacher@higher.edu"], ["password_digest", "$2a$10$eeiQrScnHr1aLXDLZNUoOucDSLo2Zapsb52qdVSXrQl8oN5bOlowK"], ["created_at", "2015-02-09 21:44:07.143620"], ["updated_at", "2015-02-09 21:44:07.143620"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "teachers" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Bob Builder"], ["email", "BobBuilder@higher.edu"], ["password_digest", "$2a$10$gDPnmXVFlsEcQNAhMA6yQuBYER3OLgT5G3dxxnQdQd813jNPEaW26"], ["created_at", "2015-02-09 21:44:07.213752"], ["updated_at", "2015-02-09 21:44:07.213752"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.5ms)[0m  INSERT INTO "achievements" ("student_email", "assignment_name", "due_on", "score", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["student_email", "sara@sara.com"], ["assignment_name", "homework 1"], ["due_on", "2015-01-02"], ["score", 98], ["created_at", "2015-02-09 21:44:07.226456"], ["updated_at", "2015-02-09 21:44:07.226456"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "achievements" ("student_email", "assignment_name", "due_on", "score", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["student_email", "sara@sara.com"], ["assignment_name", "homework 2"], ["due_on", "2015-01-03"], ["score", 95], ["created_at", "2015-02-09 21:44:07.236645"], ["updated_at", "2015-02-09 21:44:07.236645"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "achievements" ("student_email", "assignment_name", "due_on", "score", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["student_email", "emily@emily.com"], ["assignment_name", "homework 1"], ["due_on", "2015-01-02"], ["score", 85], ["created_at", "2015-02-09 21:44:07.242183"], ["updated_at", "2015-02-09 21:44:07.242183"]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "achievements" ("student_email", "assignment_name", "due_on", "score", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["student_email", "emily@emily.com"], ["assignment_name", "homework 2"], ["due_on", "2015-01-03"], ["score", 87], ["created_at", "2015-02-09 21:44:07.248855"], ["updated_at", "2015-02-09 21:44:07.248855"]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "achievements" ("student_email", "assignment_name", "due_on", "score", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["student_email", "john@john.com"], ["assignment_name", "homework 1"], ["due_on", "2015-01-02"], ["score", 60], ["created_at", "2015-02-09 21:44:07.255797"], ["updated_at", "2015-02-09 21:44:07.255797"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "achievements" ("student_email", "assignment_name", "due_on", "score", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["student_email", "john@john.com"], ["assignment_name", "homework 2"], ["due_on", "2015-01-03"], ["score", 63], ["created_at", "2015-02-09 21:44:07.258779"], ["updated_at", "2015-02-09 21:44:07.258779"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.6ms)[0m  INSERT INTO "achievements" ("student_email", "assignment_name", "due_on", "score", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["student_email", "mark@mark.com"], ["assignment_name", "homework 1"], ["due_on", "2015-01-02"], ["score", 96], ["created_at", "2015-02-09 21:44:07.266608"], ["updated_at", "2015-02-09 21:44:07.266608"]]
+  [1m[36m (2.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "achievements" ("student_email", "assignment_name", "due_on", "score", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["student_email", "mark@mark.com"], ["assignment_name", "homework 2"], ["due_on", "2015-01-03"], ["score", 99], ["created_at", "2015-02-09 21:44:07.276562"], ["updated_at", "2015-02-09 21:44:07.276562"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "achievements" ("student_email", "assignment_name", "due_on", "score", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["student_email", "stacy@stacy.com"], ["assignment_name", "homework 1"], ["due_on", "2015-01-02"], ["score", 86], ["created_at", "2015-02-09 21:44:07.283042"], ["updated_at", "2015-02-09 21:44:07.283042"]]
+  [1m[36m (2.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "achievements" ("student_email", "assignment_name", "due_on", "score", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["student_email", "stacy@stacy.com"], ["assignment_name", "homework 2"], ["due_on", "2015-01-03"], ["score", 82], ["created_at", "2015-02-09 21:44:07.292197"], ["updated_at", "2015-02-09 21:44:07.292197"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "sara"], ["student_email", "sara@sara.com"], ["password_digest", "$2a$10$wMn9nWIT4I42UnUAEK2xDe5EMyAGdTqBUZf1mvY6kbm/.5hR/FAZ6"], ["teacher_id", 1], ["created_at", "2015-02-09 21:44:07.394754"], ["updated_at", "2015-02-09 21:44:07.394754"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "emily"], ["student_email", "emily@emily.com"], ["password_digest", "$2a$10$4t4n8tQgIYDLW1JylhQt0ONSDVx1r1GDd8QiL10ftsIvfw8bb/SUW"], ["teacher_id", 1], ["created_at", "2015-02-09 21:44:07.470110"], ["updated_at", "2015-02-09 21:44:07.470110"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "john"], ["student_email", "john@john.com"], ["password_digest", "$2a$10$Lp71dz7sTXw0WpK7AokqCOQQ0gu1zlC9i3ycgl6yDjnLPQ2ZTlO.i"], ["teacher_id", 2], ["created_at", "2015-02-09 21:44:07.542043"], ["updated_at", "2015-02-09 21:44:07.542043"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "james"], ["student_email", "james@james.com"], ["password_digest", "$2a$10$r83fcbcxAjk.5R0nA.TRCeUzdYJtqmWEoPxd88gzwdnUvRcLw6O5a"], ["teacher_id", 2], ["created_at", "2015-02-09 21:44:07.614073"], ["updated_at", "2015-02-09 21:44:07.614073"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "mark"], ["student_email", "mark@mark.com"], ["password_digest", "$2a$10$kdLAzn6o08s.FAHVGyC3y.THpFiRBAle1SrEz4hkXExcHFjY9EGHa"], ["teacher_id", 3], ["created_at", "2015-02-09 21:44:07.682687"], ["updated_at", "2015-02-09 21:44:07.682687"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "stacy"], ["student_email", "stacy@stacy.com"], ["password_digest", "$2a$10$/FzuZybAZoxhsakT92i9ke67LNvOT/StfMzJ4BJ52ad5B0m0C3DL6"], ["teacher_id", 3], ["created_at", "2015-02-09 21:44:07.755010"], ["updated_at", "2015-02-09 21:44:07.755010"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "dad"], ["email", "dad@dad.com"], ["password_digest", "$2a$10$jYD2oaVZV0dKvyZi6dWa6u6GyoAQrZ9A1VlyhnPq54gc0YpohPnL2"], ["child_name", "sara"], ["created_at", "2015-02-09 21:44:07.830048"], ["updated_at", "2015-02-09 21:44:07.830048"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "mom"], ["email", "mom@mom.com"], ["password_digest", "$2a$10$9ejWq6jK7A.foMEA4brYF.5W.SkS3SDvjl8OzGjzX/te1tmOCCoQO"], ["child_name", "emily"], ["created_at", "2015-02-09 21:44:07.904178"], ["updated_at", "2015-02-09 21:44:07.904178"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "herschel"], ["email", "herschel@herschel.com"], ["password_digest", "$2a$10$54dq3ceet7olKn1.ZkHGFuBhoShksiLA2WIBEwA3Zy.lvv23/vS7O"], ["child_name", "john"], ["created_at", "2015-02-09 21:44:07.973685"], ["updated_at", "2015-02-09 21:44:07.973685"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "micah"], ["email", "micah@micah.com"], ["password_digest", "$2a$10$CRR1nwovc/wLFLK.p7KNq.kQmRx.vxs567yzhn4xRKbVvptVV.hJW"], ["child_name", "james"], ["created_at", "2015-02-09 21:44:08.048800"], ["updated_at", "2015-02-09 21:44:08.048800"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Sandy"], ["email", "Sandy@Sandy.com"], ["password_digest", "$2a$10$/25GfkCI2XM1Qvd22oo3mOKbrfaYvb5XcXFFq0mrgP/xWkMWJCHde"], ["child_name", "mark"], ["created_at", "2015-02-09 21:44:08.118993"], ["updated_at", "2015-02-09 21:44:08.118993"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Joey"], ["email", "Joey@Joey.com"], ["password_digest", "$2a$10$05.LXozBY4olQtlbyerUnOlhUMj/3vmnQKX2lEglaIuZbqPEZBW3C"], ["child_name", "stacy"], ["created_at", "2015-02-09 21:44:08.192006"], ["updated_at", "2015-02-09 21:44:08.192006"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "achievements" ("name", "date_on", "point_value", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Use git hub successfully"], ["date_on", "2015-01-03"], ["point_value", 200], ["created_at", "2015-02-09 21:44:08.199855"], ["updated_at", "2015-02-09 21:44:08.199855"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "achievements" ("name", "date_on", "point_value", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Use heroku successfully"], ["date_on", "2015-01-04"], ["point_value", 1000], ["created_at", "2015-02-09 21:44:08.202162"], ["updated_at", "2015-02-09 21:44:08.202162"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "achievements" ("name", "date_on", "point_value", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "finish homework successfully"], ["date_on", "2015-01-03"], ["point_value", 2000], ["created_at", "2015-02-09 21:44:08.204695"], ["updated_at", "2015-02-09 21:44:08.204695"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "achievements" ("name", "date_on", "point_value", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Present homework in class"], ["date_on", "2015-01-03"], ["point_value", 400], ["created_at", "2015-02-09 21:44:08.206926"], ["updated_at", "2015-02-09 21:44:08.206926"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 17:11:16 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"DjHgYcnZrVklEAYvR4iaDFvH5rpZ6IM+1TAyLDVTlT9RY4h4an6CNgRyO7XJC+imRLCwv0l5fje3hQafsZSBTg==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"Teacher", "commit"=>"login"}
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."email" = ? LIMIT 1  [["email", "SusanSmith@higher.edu"]]
+Redirected to http://localhost:3000/teachers
+Completed 302 Found in 111ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:11:16 -0500
+Processing by TeachersController#index as HTML
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered teachers/index.html.erb within layouts/application (17.8ms)
+Completed 500 Internal Server Error in 37ms
+
+ActionView::Template::Error (uninitialized constant ActionView::CompiledTemplates::Achievement):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.score %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180758820120'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180758820120'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (72.7ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:14:25 -0500
+Processing by TeachersController#index as HTML
+  [1m[35mStudent Load (0.3ms)[0m  SELECT "students".* FROM "students"
+  Rendered teachers/index.html.erb within layouts/application (6.3ms)
+Completed 500 Internal Server Error in 13ms
+
+ActionView::Template::Error (uninitialized constant ActionView::CompiledTemplates::Achievement):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.score %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180758820120'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180758820120'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (4.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (60.4ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:14:29 -0500
+Processing by TeachersController#index as HTML
+  [1m[36mStudent Load (0.1ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered teachers/index.html.erb within layouts/application (6.3ms)
+Completed 500 Internal Server Error in 13ms
+
+ActionView::Template::Error (uninitialized constant ActionView::CompiledTemplates::Achievement):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.score %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180758820120'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180758820120'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (4.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (6.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (67.6ms)
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 17:14:37 -0500
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"DjHgYcnZrVklEAYvR4iaDFvH5rpZ6IM+1TAyLDVTlT9RY4h4an6CNgRyO7XJC+imRLCwv0l5fje3hQafsZSBTg==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"Teacher", "commit"=>"login"}
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."email" = ? LIMIT 1  [["email", "SusanSmith@higher.edu"]]
+Redirected to http://localhost:3000/teachers
+Completed 302 Found in 85ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:14:37 -0500
+Processing by TeachersController#index as HTML
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered teachers/index.html.erb within layouts/application (5.6ms)
+Completed 500 Internal Server Error in 12ms
+
+ActionView::Template::Error (uninitialized constant ActionView::CompiledTemplates::Achievement):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.score %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180758820120'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180758820120'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (64.5ms)
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 17:25:27 -0500
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"DjHgYcnZrVklEAYvR4iaDFvH5rpZ6IM+1TAyLDVTlT9RY4h4an6CNgRyO7XJC+imRLCwv0l5fje3hQafsZSBTg==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"Teacher", "commit"=>"login"}
+  [1m[35mTeacher Load (0.1ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."email" = ? LIMIT 1  [["email", "SusanSmith@higher.edu"]]
+Redirected to http://localhost:3000/teachers
+Completed 302 Found in 89ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:25:27 -0500
+Processing by TeachersController#index as HTML
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered teachers/index.html.erb within layouts/application (11.6ms)
+Completed 500 Internal Server Error in 23ms
+
+ActionView::Template::Error (uninitialized constant ActionView::CompiledTemplates::Achievement):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.score %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180756983240'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180756983240'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (6.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (64.3ms)
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 17:26:12 -0500
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"DjHgYcnZrVklEAYvR4iaDFvH5rpZ6IM+1TAyLDVTlT9RY4h4an6CNgRyO7XJC+imRLCwv0l5fje3hQafsZSBTg==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"Teacher", "commit"=>"login"}
+  [1m[35mTeacher Load (0.1ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."email" = ? LIMIT 1  [["email", "SusanSmith@higher.edu"]]
+Redirected to http://localhost:3000/teachers
+Completed 302 Found in 88ms (ActiveRecord: 0.1ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:26:12 -0500
+Processing by TeachersController#index as HTML
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered teachers/index.html.erb within layouts/application (4.5ms)
+Completed 500 Internal Server Error in 11ms
+
+ActionView::Template::Error (undefined method `get_assignments_for_student_email' for #<Class:0x007fa87633b9b0>):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.score %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180777598180'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180777598180'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (61.5ms)
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 17:39:13 -0500
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"DjHgYcnZrVklEAYvR4iaDFvH5rpZ6IM+1TAyLDVTlT9RY4h4an6CNgRyO7XJC+imRLCwv0l5fje3hQafsZSBTg==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"Teacher", "commit"=>"login"}
+  [1m[35mTeacher Load (0.1ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."email" = ? LIMIT 1  [["email", "SusanSmith@higher.edu"]]
+Redirected to http://localhost:3000/teachers
+Completed 302 Found in 94ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:39:14 -0500
+Processing by TeachersController#index as HTML
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered teachers/index.html.erb within layouts/application (10.5ms)
+Completed 500 Internal Server Error in 20ms
+
+ActionView::Template::Error (undefined method `get_assignments_for_student_email' for #<Class:0x007fa878801a10>):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.score %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180776697320'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180776697320'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (6.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (64.8ms)
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 17:41:46 -0500
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"DjHgYcnZrVklEAYvR4iaDFvH5rpZ6IM+1TAyLDVTlT9RY4h4an6CNgRyO7XJC+imRLCwv0l5fje3hQafsZSBTg==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"Teacher", "commit"=>"login"}
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."email" = ? LIMIT 1  [["email", "SusanSmith@higher.edu"]]
+Redirected to http://localhost:3000/teachers
+Completed 302 Found in 87ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:41:46 -0500
+Processing by TeachersController#index as HTML
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered teachers/index.html.erb within layouts/application (9.4ms)
+Completed 500 Internal Server Error in 18ms
+
+ActionView::Template::Error (undefined method `get_assignments_for_student_email' for #<Class:0x007fa878861668>):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.score %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180759131740'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759131740'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (7.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (65.4ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:49:48 -0500
+Processing by TeachersController#index as HTML
+  [1m[35mStudent Load (0.3ms)[0m  SELECT "students".* FROM "students"
+  Rendered teachers/index.html.erb within layouts/application (9.8ms)
+Completed 500 Internal Server Error in 21ms
+
+ActionView::Template::Error (undefined method `get_assignments_for_student_email' for #<Class:0x007fa878943888>):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.score %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180759131740'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759131740'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (7.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (3.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (70.6ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:51:12 -0500
+Processing by TeachersController#index as HTML
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered teachers/index.html.erb within layouts/application (4.5ms)
+Completed 500 Internal Server Error in 11ms
+
+ActionView::Template::Error (undefined method `get_assignments_for_student_email' for #<Class:0x007fa878943888>):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.point_value %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (6.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (67.9ms)
+
+
+Started GET "/" for ::1 at 2015-02-09 17:51:15 -0500
+Processing by LoginController#login as HTML
+  Rendered login/login.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 104ms (Views: 82.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application-73a29648520d357e3ebbd091be7aaff6.css?body=1" for ::1 at 2015-02-09 17:51:15 -0500
+
+
+Started GET "/assets/achievements-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 17:51:15 -0500
+
+
+Started GET "/assets/turbolinks-da8ddad9c2c5483d4c5c30c1ce325253.js?body=1" for ::1 at 2015-02-09 17:51:15 -0500
+
+
+Started GET "/assets/login-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 17:51:15 -0500
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for ::1 at 2015-02-09 17:51:15 -0500
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-02-09 17:51:15 -0500
+
+
+Started GET "/assets/students-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 17:51:15 -0500
+
+
+Started GET "/assets/parents-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 17:51:15 -0500
+
+
+Started GET "/assets/teachers-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 17:51:15 -0500
+
+
+Started GET "/assets/application-e0915e1eb4c59ce700a2ef8fe932c748.js?body=1" for ::1 at 2015-02-09 17:51:15 -0500
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 17:51:26 -0500
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dkLaNkb6k9JxYLaxqbILxqRO79nK7kcbxaMQlVgYKLopELIv5V28vVACiysnMXlsuzm53Np/uhKnFiQm3N88yw==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"", "commit"=>"login"}
+  [1m[35mParent Load (0.1ms)[0m  SELECT  "parents".* FROM "parents" WHERE "parents"."email" = ? LIMIT 1  [["email", "SusanSmith@higher.edu"]]
+  Rendered login/login.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 80ms (Views: 58.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application-73a29648520d357e3ebbd091be7aaff6.css?body=1" for ::1 at 2015-02-09 17:51:26 -0500
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-02-09 17:51:26 -0500
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for ::1 at 2015-02-09 17:51:26 -0500
+
+
+Started GET "/assets/achievements-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 17:51:26 -0500
+
+
+Started GET "/assets/login-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 17:51:26 -0500
+
+
+Started GET "/assets/turbolinks-da8ddad9c2c5483d4c5c30c1ce325253.js?body=1" for ::1 at 2015-02-09 17:51:26 -0500
+
+
+Started GET "/assets/parents-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 17:51:26 -0500
+
+
+Started GET "/assets/students-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 17:51:26 -0500
+
+
+Started GET "/assets/teachers-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 17:51:26 -0500
+
+
+Started GET "/assets/application-e0915e1eb4c59ce700a2ef8fe932c748.js?body=1" for ::1 at 2015-02-09 17:51:26 -0500
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 17:51:36 -0500
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"o8AQ34nM7iN/Sn5TxmOAFl0kwls73vU9w+vx11pEeT78knjGKmvBTF4oQ8lI4PK8QlOUXitPCDShXsVk3oNtTw==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"Teacher", "commit"=>"login"}
+  [1m[36mTeacher Load (0.1ms)[0m  [1mSELECT  "teachers".* FROM "teachers" WHERE "teachers"."email" = ? LIMIT 1[0m  [["email", "SusanSmith@higher.edu"]]
+Redirected to http://localhost:3000/teachers
+Completed 302 Found in 91ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:51:36 -0500
+Processing by TeachersController#index as HTML
+  [1m[35mStudent Load (0.2ms)[0m  SELECT "students".* FROM "students"
+  Rendered teachers/index.html.erb within layouts/application (5.3ms)
+Completed 500 Internal Server Error in 12ms
+
+ActionView::Template::Error (undefined method `get_assignments_for_student_email' for #<Class:0x007fa878943888>):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.point_value %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (65.7ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 17:52:46 -0500
+Processing by TeachersController#index as HTML
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered teachers/index.html.erb within layouts/application (9.4ms)
+Completed 500 Internal Server Error in 19ms
+
+ActionView::Template::Error (undefined method `get_assignments_for_student_email' for #<Class:0x007fa873f45d30>):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.point_value %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (65.8ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:15:40 -0500
+
+SyntaxError (/Users/Fallamander/ironyard/achievementbook_tables/config/routes.rb:86: syntax error, unexpected keyword_end, expecting end-of-input):
+  config/routes.rb:86: syntax error, unexpected keyword_end, expecting end-of-input
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (2.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (59.3ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:16:52 -0500
+
+SyntaxError (/Users/Fallamander/ironyard/achievementbook_tables/config/routes.rb:86: syntax error, unexpected end-of-input, expecting keyword_end):
+  config/routes.rb:86: syntax error, unexpected end-of-input, expecting keyword_end
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (8.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (71.4ms)
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for ::1 at 2015-02-09 18:16:59 -0500
+
+SyntaxError (/Users/Fallamander/ironyard/achievementbook_tables/config/routes.rb:86: syntax error, unexpected end-of-input, expecting keyword_end):
+  config/routes.rb:86: syntax error, unexpected end-of-input, expecting keyword_end
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (2.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (63.0ms)
+
+
+Started GET "/assets/login-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:17:00 -0500
+
+
+Started GET "/assets/turbolinks-da8ddad9c2c5483d4c5c30c1ce325253.js?body=1" for ::1 at 2015-02-09 18:17:00 -0500
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-02-09 18:17:00 -0500
+
+
+Started GET "/assets/application-73a29648520d357e3ebbd091be7aaff6.css?body=1" for ::1 at 2015-02-09 18:17:00 -0500
+
+
+Started GET "/assets/achievements-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:17:00 -0500
+
+
+Started GET "/assets/teachers-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:17:00 -0500
+
+
+Started GET "/assets/parents-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:17:00 -0500
+
+
+Started GET "/assets/students-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:17:00 -0500
+
+
+Started GET "/assets/application-e0915e1eb4c59ce700a2ef8fe932c748.js?body=1" for ::1 at 2015-02-09 18:17:00 -0500
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 18:17:03 -0500
+
+ActionController::RoutingError (No route matches [POST] "/login/login"):
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:22:in `middleware_call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:22:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_table.html.erb (9.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (74.2ms)
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 18:25:01 -0500
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"o8AQ34nM7iN/Sn5TxmOAFl0kwls73vU9w+vx11pEeT78knjGKmvBTF4oQ8lI4PK8QlOUXitPCDShXsVk3oNtTw==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"Teacher", "commit"=>"login"}
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."email" = ? LIMIT 1  [["email", "SusanSmith@higher.edu"]]
+Redirected to http://localhost:3000/teachers
+Completed 302 Found in 93ms (ActiveRecord: 0.9ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:25:01 -0500
+Processing by TeachersController#index as HTML
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT "students".* FROM "students"[0m
+  Rendered teachers/index.html.erb within layouts/application (10.6ms)
+Completed 500 Internal Server Error in 20ms
+
+ActionView::Template::Error (undefined method `get_assignments_for_student_email' for #<Class:0x007fa872628460>):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.point_value %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (65.6ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:26:16 -0500
+Processing by TeachersController#index as HTML
+  [1m[35mStudent Load (0.3ms)[0m  SELECT "students".* FROM "students"
+  Rendered teachers/index.html.erb within layouts/application (9.7ms)
+Completed 500 Internal Server Error in 21ms
+
+ActionView::Template::Error (undefined method `get_assignments_for_student_email' for #<Class:0x007fa8765abe98>):
+     7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.point_value %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+  app/views/teachers/index.html.erb:7:in `each'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (10.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (72.1ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:39:11 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (1.5ms)
+Completed 500 Internal Server Error in 14ms
+
+SyntaxError (/Users/Fallamander/ironyard/achievementbook_tables/app/models/student.rb:51: syntax error, unexpected keyword_end, expecting end-of-input):
+  app/models/student.rb:51: syntax error, unexpected keyword_end, expecting end-of-input
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (64.3ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:41:31 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (1.4ms)
+Completed 500 Internal Server Error in 12ms
+
+SyntaxError (/Users/Fallamander/ironyard/achievementbook_tables/app/models/student.rb:51: syntax error, unexpected keyword_end, expecting end-of-input):
+  app/models/student.rb:51: syntax error, unexpected keyword_end, expecting end-of-input
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (6.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (65.5ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:42:16 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (6.6ms)
+Completed 500 Internal Server Error in 17ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fa877966de8>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (62.0ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:42:58 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (6.4ms)
+Completed 500 Internal Server Error in 17ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fa873e94738>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (64.4ms)
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-02-09 18:43:00 -0500
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for ::1 at 2015-02-09 18:43:00 -0500
+
+
+Started GET "/assets/achievements-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:43:00 -0500
+
+
+Started GET "/assets/application-73a29648520d357e3ebbd091be7aaff6.css?body=1" for ::1 at 2015-02-09 18:43:00 -0500
+
+
+Started GET "/assets/turbolinks-da8ddad9c2c5483d4c5c30c1ce325253.js?body=1" for ::1 at 2015-02-09 18:43:00 -0500
+
+
+Started GET "/assets/parents-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:43:00 -0500
+
+
+Started GET "/assets/login-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:43:00 -0500
+
+
+Started GET "/assets/students-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:43:00 -0500
+
+
+Started GET "/assets/teachers-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:43:00 -0500
+
+
+Started GET "/assets/application-e0915e1eb4c59ce700a2ef8fe932c748.js?body=1" for ::1 at 2015-02-09 18:43:00 -0500
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 18:43:08 -0500
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"o8AQ34nM7iN/Sn5TxmOAFl0kwls73vU9w+vx11pEeT78knjGKmvBTF4oQ8lI4PK8QlOUXitPCDShXsVk3oNtTw==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"Teacher", "commit"=>"login"}
+  [1m[36mTeacher Load (0.1ms)[0m  [1mSELECT  "teachers".* FROM "teachers" WHERE "teachers"."email" = ? LIMIT 1[0m  [["email", "SusanSmith@higher.edu"]]
+Redirected to http://localhost:3000/teachers
+Completed 302 Found in 88ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:43:08 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (4.9ms)
+Completed 500 Internal Server Error in 12ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fa873e94738>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (4.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (66.3ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:44:36 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (7.1ms)
+Completed 500 Internal Server Error in 18ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fa8765890a0>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (4.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (62.1ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:46:01 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (6.5ms)
+Completed 500 Internal Server Error in 17ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fa87667bf30>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (3.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (63.6ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:46:03 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (2.9ms)
+Completed 500 Internal Server Error in 10ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fa87667bf30>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (61.5ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:46:05 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (10.2ms)
+Completed 500 Internal Server Error in 17ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fa87667bf30>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (64.8ms)
+
+
+Started GET "/assets/application-73a29648520d357e3ebbd091be7aaff6.css?body=1" for ::1 at 2015-02-09 18:46:06 -0500
+
+
+Started GET "/assets/turbolinks-da8ddad9c2c5483d4c5c30c1ce325253.js?body=1" for ::1 at 2015-02-09 18:46:06 -0500
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-02-09 18:46:06 -0500
+
+
+Started GET "/assets/parents-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:46:06 -0500
+
+
+Started GET "/assets/achievements-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:46:06 -0500
+
+
+Started GET "/assets/students-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:46:06 -0500
+
+
+Started GET "/assets/login-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:46:06 -0500
+
+
+Started GET "/assets/teachers-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:46:06 -0500
+
+
+Started GET "/assets/application-e0915e1eb4c59ce700a2ef8fe932c748.js?body=1" for ::1 at 2015-02-09 18:46:06 -0500
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 18:46:10 -0500
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"o8AQ34nM7iN/Sn5TxmOAFl0kwls73vU9w+vx11pEeT78knjGKmvBTF4oQ8lI4PK8QlOUXitPCDShXsVk3oNtTw==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"Teacher", "commit"=>"login"}
+  [1m[35mTeacher Load (0.1ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."email" = ? LIMIT 1  [["email", "SusanSmith@higher.edu"]]
+Redirected to http://localhost:3000/teachers
+Completed 302 Found in 87ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:46:10 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (3.1ms)
+Completed 500 Internal Server Error in 10ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fa87667bf30>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (7.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (3.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (76.7ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:48:18 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (16.1ms)
+Completed 500 Internal Server Error in 26ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fa873a14708>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb___1311443840365625805_70180759178620'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (62.0ms)
+  [1m[36mStudent Load (0.1ms)[0m  [1mSELECT  "students".* FROM "students"  ORDER BY "students"."id" ASC LIMIT 1[0m
+  [1m[35mStudent Load (0.2ms)[0m  SELECT  "students".* FROM "students"  ORDER BY "students"."id" ASC LIMIT 1
+  [1m[36m (1.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (1.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateTeachers (20150205200430)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "teachers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password_digest" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150205200430"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to CreateStudents (20150205200621)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "student_email" varchar, "teacher_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150205200621"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+Migrating to CreateParents (20150205200651)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "parents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "child_name" varchar, "teacher_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20150205200651"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to Createpasswords (20150205223042)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "students" ADD "password_digest" varchar
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "parents" ADD "password_digest" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150205223042"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateAchievements (20150209211758)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "achievements" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "date_on" date, "point_value" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150209211758"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateJoinTableAchievementsStudents (20150209213433)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "achievements_students" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "achievement_id" varchar, "student_id" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20150209213433"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "teachers" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Susan Smith"], ["email", "SusanSmith@higher.edu"], ["password_digest", "$2a$10$TFYbN2HKCYjB3EForhqUe.uWWZdZk2L8C0VEYiJnRwXFR/jSsmecC"], ["created_at", "2015-02-09 23:51:52.183480"], ["updated_at", "2015-02-09 23:51:52.183480"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "teachers" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Tom Teacher"], ["email", "TomTeacher@higher.edu"], ["password_digest", "$2a$10$PMjYEhSU/v000W.BbXwpvuGaZtlJnCOCE0Hw8cqC5.nbZ7trYFoFm"], ["created_at", "2015-02-09 23:51:52.254928"], ["updated_at", "2015-02-09 23:51:52.254928"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "teachers" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Bob Builder"], ["email", "BobBuilder@higher.edu"], ["password_digest", "$2a$10$5slY3OnoLp161TjB8JdfbOqYB5dq/mskOHz6FGy6an.hmPY7/NjKm"], ["created_at", "2015-02-09 23:51:52.326524"], ["updated_at", "2015-02-09 23:51:52.326524"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "sara"], ["student_email", "sara@sara.com"], ["password_digest", "$2a$10$/J4iRKOf/IkQ3n8jCQmbyO6nozAHTayZrb6ktIRmOozCiMkUjLyyK"], ["teacher_id", 1], ["created_at", "2015-02-09 23:51:52.401559"], ["updated_at", "2015-02-09 23:51:52.401559"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "emily"], ["student_email", "emily@emily.com"], ["password_digest", "$2a$10$2tJgc5..ifsV8iQLwSguFe9cxdN4fRWCZhv2KMoSZ3/S1a.QcOoRW"], ["teacher_id", 1], ["created_at", "2015-02-09 23:51:52.472683"], ["updated_at", "2015-02-09 23:51:52.472683"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "john"], ["student_email", "john@john.com"], ["password_digest", "$2a$10$xvpBpTi1V41eLkF1C9VdCutZNXe8OODrqz7t.XMx1SP.n/AhZRDRG"], ["teacher_id", 2], ["created_at", "2015-02-09 23:51:52.543164"], ["updated_at", "2015-02-09 23:51:52.543164"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "james"], ["student_email", "james@james.com"], ["password_digest", "$2a$10$ZPcwYzAvPtCjZgcmnRkiFOHq0fPtJXdx/9UJfSU2CghftED4bhOCu"], ["teacher_id", 2], ["created_at", "2015-02-09 23:51:52.613804"], ["updated_at", "2015-02-09 23:51:52.613804"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "mark"], ["student_email", "mark@mark.com"], ["password_digest", "$2a$10$JMW2.wScOdtVc.x0q6biWOIXWWfu0kCu2KllZgoWTi1aOKYDYtnju"], ["teacher_id", 3], ["created_at", "2015-02-09 23:51:52.683322"], ["updated_at", "2015-02-09 23:51:52.683322"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "students" ("name", "student_email", "password_digest", "teacher_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "stacy"], ["student_email", "stacy@stacy.com"], ["password_digest", "$2a$10$K2d5kTk5AzSa/yj5LFsChuGkIduSl7yQTxewwdm6VTHNdKvsizOmi"], ["teacher_id", 3], ["created_at", "2015-02-09 23:51:52.757976"], ["updated_at", "2015-02-09 23:51:52.757976"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "dad"], ["email", "dad@dad.com"], ["password_digest", "$2a$10$Ca3Pz2HwuzYLZ8jqhOxHO.UkFEhxKOFu6/vJ9gifkwHU.Ah3/A6Ke"], ["child_name", "sara"], ["created_at", "2015-02-09 23:51:52.831087"], ["updated_at", "2015-02-09 23:51:52.831087"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "mom"], ["email", "mom@mom.com"], ["password_digest", "$2a$10$WzrtHeqf8j14AK9CG96KLew8Ykl/HiLOKNiqNvnTW0nYGE/23vd1m"], ["child_name", "emily"], ["created_at", "2015-02-09 23:51:52.900488"], ["updated_at", "2015-02-09 23:51:52.900488"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "herschel"], ["email", "herschel@herschel.com"], ["password_digest", "$2a$10$we8RSmuCTxKeag7xsMVBteA58.vXtTxCi5HudnbqHh7U3SqGkkR5i"], ["child_name", "john"], ["created_at", "2015-02-09 23:51:52.966266"], ["updated_at", "2015-02-09 23:51:52.966266"]]
+  [1m[36m (1.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "micah"], ["email", "micah@micah.com"], ["password_digest", "$2a$10$2gz.RQpEm99BfagcD7Nprek1bvAdndyuNdLG.U0S17mJ.PTmqL6r6"], ["child_name", "james"], ["created_at", "2015-02-09 23:51:53.039379"], ["updated_at", "2015-02-09 23:51:53.039379"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["name", "Sandy"], ["email", "Sandy@Sandy.com"], ["password_digest", "$2a$10$QUg.qZw2fgLGSW4UV4KSs.mfiN0SIPpopRsmKjorV4Xi15aJMQFIe"], ["child_name", "mark"], ["created_at", "2015-02-09 23:51:53.107832"], ["updated_at", "2015-02-09 23:51:53.107832"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "parents" ("name", "email", "password_digest", "child_name", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Joey"], ["email", "Joey@Joey.com"], ["password_digest", "$2a$10$WWiuw7vlCN.vjbu1QlTKPeYj.TcB2kf6DN4YT4MiBAqLFjcOxIe6C"], ["child_name", "stacy"], ["created_at", "2015-02-09 23:51:53.174667"], ["updated_at", "2015-02-09 23:51:53.174667"]]
+  [1m[35m (0.9ms)[0m  commit transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "achievements" ("name", "date_on", "point_value", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Use git hub successfully"], ["date_on", "2015-01-03"], ["point_value", 200], ["created_at", "2015-02-09 23:51:53.180911"], ["updated_at", "2015-02-09 23:51:53.180911"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "achievements" ("name", "date_on", "point_value", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Use heroku successfully"], ["date_on", "2015-01-04"], ["point_value", 1000], ["created_at", "2015-02-09 23:51:53.183063"], ["updated_at", "2015-02-09 23:51:53.183063"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "achievements" ("name", "date_on", "point_value", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "finish homework successfully"], ["date_on", "2015-01-03"], ["point_value", 2000], ["created_at", "2015-02-09 23:51:53.185429"], ["updated_at", "2015-02-09 23:51:53.185429"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "achievements" ("name", "date_on", "point_value", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Present homework in class"], ["date_on", "2015-01-03"], ["point_value", 400], ["created_at", "2015-02-09 23:51:53.187992"], ["updated_at", "2015-02-09 23:51:53.187992"]]
+  [1m[35m (2.8ms)[0m  commit transaction
+
+
+Started GET "/" for ::1 at 2015-02-09 18:52:08 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by LoginController#login as HTML
+  Rendered login/login.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 100ms (Views: 73.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application-73a29648520d357e3ebbd091be7aaff6.css?body=1" for ::1 at 2015-02-09 18:52:08 -0500
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-02-09 18:52:08 -0500
+
+
+Started GET "/assets/parents-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:52:08 -0500
+
+
+Started GET "/assets/login-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:52:08 -0500
+
+
+Started GET "/assets/achievements-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:52:08 -0500
+
+
+Started GET "/assets/turbolinks-da8ddad9c2c5483d4c5c30c1ce325253.js?body=1" for ::1 at 2015-02-09 18:52:08 -0500
+
+
+Started GET "/assets/students-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:52:08 -0500
+
+
+Started GET "/assets/teachers-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 18:52:08 -0500
+
+
+Started GET "/assets/application-e0915e1eb4c59ce700a2ef8fe932c748.js?body=1" for ::1 at 2015-02-09 18:52:08 -0500
+
+
+Started POST "/login/login" for ::1 at 2015-02-09 18:52:30 -0500
+Processing by LoginController#login as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lmOccodFneBZ1jAZNxCs+eTptmrRTlNbyovsWSk4Aq7z/N2iymwYZ7yx6zhubC52gNPNaoziADEPf130evFaQA==", "email"=>"SusanSmith@higher.edu", "password"=>"[FILTERED]", "type"=>"Teacher", "commit"=>"login"}
+  [1m[35mTeacher Load (0.2ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."email" = ? LIMIT 1  [["email", "SusanSmith@higher.edu"]]
+Redirected to http://localhost:3000/teachers
+Completed 302 Found in 103ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:52:30 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (11.0ms)
+Completed 500 Internal Server Error in 22ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3d6e30e8>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188870914940'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (61.7ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:53:40 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (6.8ms)
+Completed 500 Internal Server Error in 17ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3d474410>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188856355060'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (65.8ms)
+
+
+Started PUT "/console/repl_sessions/342e9113e0b8e091fedc2ea7a05b6c61" for ::1 at 2015-02-09 18:53:51 -0500
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT "students".* FROM "students"[0m
+
+
+Started PUT "/console/repl_sessions/342e9113e0b8e091fedc2ea7a05b6c61" for ::1 at 2015-02-09 18:53:55 -0500
+  [1m[35mStudent Load (0.2ms)[0m  SELECT  "students".* FROM "students"  ORDER BY "students"."id" ASC LIMIT 1
+
+
+Started PUT "/console/repl_sessions/342e9113e0b8e091fedc2ea7a05b6c61" for ::1 at 2015-02-09 18:54:02 -0500
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT  "students".* FROM "students"  ORDER BY "students"."id" ASC LIMIT 1[0m
+
+
+Started PUT "/console/repl_sessions/342e9113e0b8e091fedc2ea7a05b6c61" for ::1 at 2015-02-09 18:54:20 -0500
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:55:03 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (4.3ms)
+Completed 500 Internal Server Error in 13ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3d474410>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( 1 ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188848900020'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (69.8ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:55:04 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (3.9ms)
+Completed 500 Internal Server Error in 10ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3d474410>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( 1 ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188848900020'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (4.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (68.3ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:55:05 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (2.7ms)
+Completed 500 Internal Server Error in 9ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3d474410>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( 1 ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188848900020'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (4.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (60.7ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:56:04 -0500
+Processing by TeachersController#index as HTML
+Completed 500 Internal Server Error in 8ms
+
+NoMethodError (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3ed7d7b8>):
+  app/controllers/teachers_controller.rb:8:in `index'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (3.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (62.3ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 18:56:37 -0500
+Processing by TeachersController#index as HTML
+  [1m[35mStudent Load (0.2ms)[0m  SELECT "students".* FROM "students" WHERE "students"."teacher_id" = ?  [["teacher_id", 1]]
+  Rendered teachers/index.html.erb within layouts/application (7.4ms)
+Completed 500 Internal Server Error in 22ms
+
+ActionView::Template::Error (undefined method `get_assignments_for_student_email' for #<Class:0x007fac3ecfc870>):
+     7:       <% @teachers_students.each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.point_value %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb__83958334124730606_70188882409380'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188882409380'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (64.4ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:00:01 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (3.8ms)
+Completed 500 Internal Server Error in 18ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3d7933a8>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188892836500'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (7.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (69.7ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:00:38 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (4.8ms)
+Completed 500 Internal Server Error in 18ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3b9582a8>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188892836500'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (66.6ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:00:39 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (3.2ms)
+Completed 500 Internal Server Error in 13ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3b9582a8>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188892836500'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (71.0ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:01:58 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (3.3ms)
+Completed 500 Internal Server Error in 26ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3d7e04f0>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188892836500'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (4.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (66.3ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:01:59 -0500
+Processing by TeachersController#index as HTML
+  Rendered teachers/index.html.erb within layouts/application (4.1ms)
+Completed 500 Internal Server Error in 11ms
+
+ActionView::Template::Error (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3d7e04f0>):
+    4: 
+    5: <table>
+    6:   <tbody>
+    7:       <% Student.get_all_children_for_teacher_id( session[:teacher_id] ).each do |student| %>
+    8:         <tr><td><%=  student.name  %></td></tr>
+    9:         <tr>
+   10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188892836500'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (64.5ms)
+
+
+Started PUT "/console/repl_sessions/a1f9b69817b77698824f962995ec93fd" for ::1 at 2015-02-09 19:02:14 -0500
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:04:58 -0500
+Processing by TeachersController#index as HTML
+Completed 500 Internal Server Error in 7ms
+
+NoMethodError (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3eb9a770>):
+  app/controllers/teachers_controller.rb:9:in `index'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (4.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (64.3ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:05:47 -0500
+Processing by TeachersController#index as HTML
+Completed 500 Internal Server Error in 10ms
+
+NoMethodError (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3bc30b60>):
+  app/controllers/teachers_controller.rb:9:in `index'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (4.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (64.0ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:05:48 -0500
+Processing by TeachersController#index as HTML
+Completed 500 Internal Server Error in 1ms
+
+NoMethodError (undefined method `get_all_children_for_teacher_id' for #<Class:0x007fac3bc30b60>):
+  app/controllers/teachers_controller.rb:9:in `index'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (3.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (61.2ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:08:00 -0500
+Processing by TeachersController#index as HTML
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT "students".* FROM "students" WHERE "students"."teacher_id" = ?[0m  [["teacher_id", 1]]
+  Rendered teachers/index.html.erb within layouts/application (7.9ms)
+Completed 500 Internal Server Error in 25ms
+
+ActionView::Template::Error (undefined method `get_assignments_for_student_email' for #<Class:0x007fac3ab07ed8>):
+     7:       <% @teachers_students.each do |student| %>
+     8:         <tr><td><%=  student.name  %></td></tr>
+     9:         <tr>
+    10:           <% Achievement.get_assignments_for_student_email( student.student_email ).each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.point_value %></td>
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb__83958334124730606_70188840865400'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188840865400'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (72.3ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:09:09 -0500
+Processing by TeachersController#index as HTML
+  [1m[35mStudent Load (0.2ms)[0m  SELECT "students".* FROM "students" WHERE "students"."teacher_id" = ?  [["teacher_id", 1]]
+  [1m[36mAchievement Load (0.1ms)[0m  [1mSELECT "achievements".* FROM "achievements"[0m
+  Rendered teachers/index.html.erb within layouts/application (10.9ms)
+Completed 500 Internal Server Error in 27ms
+
+ActionView::Template::Error (undefined method `assignment_name' for #<Achievement:0x007fac40137f10>):
+     9:         <tr>
+    10:           <% @achievements.each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.point_value %></td>
+    14:               <td><%= achievement.date_on %></td>
+    15:               <td><%= link_to 'Edit', edit_achievement_path(achievement) %></td>
+  app/views/teachers/index.html.erb:12:in `block (2 levels) in _app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (6.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (68.5ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:09:10 -0500
+Processing by TeachersController#index as HTML
+  [1m[35mStudent Load (0.1ms)[0m  SELECT "students".* FROM "students" WHERE "students"."teacher_id" = ?  [["teacher_id", 1]]
+  [1m[36mAchievement Load (0.1ms)[0m  [1mSELECT "achievements".* FROM "achievements"[0m
+  Rendered teachers/index.html.erb within layouts/application (4.9ms)
+Completed 500 Internal Server Error in 12ms
+
+ActionView::Template::Error (undefined method `assignment_name' for #<Achievement:0x007fac3a1aac50>):
+     9:         <tr>
+    10:           <% @achievements.each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.point_value %></td>
+    14:               <td><%= achievement.date_on %></td>
+    15:               <td><%= link_to 'Edit', edit_achievement_path(achievement) %></td>
+  app/views/teachers/index.html.erb:12:in `block (2 levels) in _app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (66.1ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:09:11 -0500
+Processing by TeachersController#index as HTML
+  [1m[35mStudent Load (0.1ms)[0m  SELECT "students".* FROM "students" WHERE "students"."teacher_id" = ?  [["teacher_id", 1]]
+  [1m[36mAchievement Load (0.1ms)[0m  [1mSELECT "achievements".* FROM "achievements"[0m
+  Rendered teachers/index.html.erb within layouts/application (4.8ms)
+Completed 500 Internal Server Error in 11ms
+
+ActionView::Template::Error (undefined method `assignment_name' for #<Achievement:0x007fac400992c0>):
+     9:         <tr>
+    10:           <% @achievements.each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.point_value %></td>
+    14:               <td><%= achievement.date_on %></td>
+    15:               <td><%= link_to 'Edit', edit_achievement_path(achievement) %></td>
+  app/views/teachers/index.html.erb:12:in `block (2 levels) in _app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (5.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (63.6ms)
+  [1m[36mAchievement Load (1.9ms)[0m  [1mSELECT "achievements".* FROM "achievements"[0m
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:09:57 -0500
+Processing by TeachersController#index as HTML
+  [1m[35mStudent Load (0.1ms)[0m  SELECT "students".* FROM "students" WHERE "students"."teacher_id" = ?  [["teacher_id", 1]]
+  [1m[36mAchievement Load (0.3ms)[0m  [1mSELECT "achievements".* FROM "achievements"[0m
+  Rendered teachers/index.html.erb within layouts/application (6.6ms)
+Completed 500 Internal Server Error in 15ms
+
+ActionView::Template::Error (undefined method `assignment_name' for #<Achievement:0x007fac3d370aa0>):
+     9:         <tr>
+    10:           <% @achievements.each do |achievement| %>
+    11:             <tr>
+    12:               <td><%= achievement.assignment_name %></td>
+    13:               <td><%= achievement.point_value %></td>
+    14:               <td><%= achievement.date_on %></td>
+    15:               <td><%= link_to 'Edit', edit_achievement_path(achievement) %></td>
+  app/views/teachers/index.html.erb:12:in `block (2 levels) in _app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+  app/views/teachers/index.html.erb:10:in `block in _app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+  app/views/teachers/index.html.erb:7:in `_app_views_teachers_index_html_erb__83958334124730606_70188843729580'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (12.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (71.9ms)
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:10:04 -0500
+Processing by TeachersController#index as HTML
+  [1m[35mStudent Load (0.2ms)[0m  SELECT "students".* FROM "students" WHERE "students"."teacher_id" = ?  [["teacher_id", 1]]
+  [1m[36mAchievement Load (0.2ms)[0m  [1mSELECT "achievements".* FROM "achievements"[0m
+  [1m[35mTeacher Load (0.1ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered teachers/index.html.erb within layouts/application (10.7ms)
+  [1m[36mTeacher Load (0.1ms)[0m  [1mSELECT "teachers".* FROM "teachers"[0m
+Completed 200 OK in 94ms (Views: 66.3ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/application-73a29648520d357e3ebbd091be7aaff6.css?body=1" for ::1 at 2015-02-09 19:10:04 -0500
+
+
+Started GET "/assets/achievements-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 19:10:04 -0500
+
+
+Started GET "/assets/login-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 19:10:04 -0500
+
+
+Started GET "/assets/turbolinks-da8ddad9c2c5483d4c5c30c1ce325253.js?body=1" for ::1 at 2015-02-09 19:10:04 -0500
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for ::1 at 2015-02-09 19:10:04 -0500
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-02-09 19:10:04 -0500
+
+
+Started GET "/assets/parents-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 19:10:04 -0500
+
+
+Started GET "/assets/students-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 19:10:04 -0500
+
+
+Started GET "/assets/teachers-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 19:10:04 -0500
+
+
+Started GET "/assets/application-e0915e1eb4c59ce700a2ef8fe932c748.js?body=1" for ::1 at 2015-02-09 19:10:04 -0500
+
+
+Started GET "/teachers" for ::1 at 2015-02-09 19:11:21 -0500
+Processing by TeachersController#index as HTML
+  [1m[35mStudent Load (0.6ms)[0m  SELECT "students".* FROM "students" WHERE "students"."teacher_id" = ?  [["teacher_id", 1]]
+  [1m[36mAchievement Load (0.2ms)[0m  [1mSELECT "achievements".* FROM "achievements"[0m
+  [1m[35mTeacher Load (0.1ms)[0m  SELECT  "teachers".* FROM "teachers" WHERE "teachers"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered teachers/index.html.erb within layouts/application (14.3ms)
+  [1m[36mTeacher Load (0.1ms)[0m  [1mSELECT "teachers".* FROM "teachers"[0m
+Completed 200 OK in 122ms (Views: 84.3ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/assets/application-73a29648520d357e3ebbd091be7aaff6.css?body=1" for ::1 at 2015-02-09 19:11:22 -0500
+
+
+Started GET "/assets/achievements-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 19:11:22 -0500
+
+
+Started GET "/assets/turbolinks-da8ddad9c2c5483d4c5c30c1ce325253.js?body=1" for ::1 at 2015-02-09 19:11:22 -0500
+
+
+Started GET "/assets/jquery-87424c3c19e96d4fb033c10ebe21ec40.js?body=1" for ::1 at 2015-02-09 19:11:22 -0500
+
+
+Started GET "/assets/jquery_ujs-e27bd20a10d28155845a22d71ef94f2f.js?body=1" for ::1 at 2015-02-09 19:11:22 -0500
+
+
+Started GET "/assets/login-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 19:11:22 -0500
+
+
+Started GET "/assets/parents-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 19:11:22 -0500
+
+
+Started GET "/assets/students-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 19:11:22 -0500
+
+
+Started GET "/assets/teachers-fcec5b5a277ac7c20cc9f45a209a3bcd.js?body=1" for ::1 at 2015-02-09 19:11:22 -0500
+
+
+Started GET "/assets/application-e0915e1eb4c59ce700a2ef8fe932c748.js?body=1" for ::1 at 2015-02-09 19:11:22 -0500
+
+
+Started GET "/achievements/1/edit_students" for ::1 at 2015-02-09 19:13:48 -0500
+
+ActionController::RoutingError (uninitialized constant AchievementsController):
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `const_get'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `block in constantize'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `each'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `inject'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `constantize'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:59:in `controller'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:38:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call'
+  activerecord (4.2.0) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:22:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_route.html.erb (2.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_table.html.erb (8.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (117.8ms)
+
+
+Started GET "/achievements/1/edit_students" for ::1 at 2015-02-09 19:16:13 -0500
+
+ActionController::RoutingError (uninitialized constant AchievementsController):
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `const_get'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `block in constantize'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `each'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `inject'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `constantize'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:59:in `controller'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:38:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call'
+  activerecord (4.2.0) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:22:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_route.html.erb (2.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_table.html.erb (1.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (99.9ms)
+
+
+Started GET "/achievements/1/edit_students" for ::1 at 2015-02-09 19:18:17 -0500
+
+ArgumentError ('achievements/:id' is not a supported controller name. This can lead to potential routing problems. See http://guides.rubyonrails.org/routing.html#specifying-a-controller-to-use):
+  config/routes.rb:15:in `block in <top (required)>'
+  config/routes.rb:1:in `<top (required)>'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (3.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (60.2ms)
+
+
+Started GET "/achievements/new" for ::1 at 2015-02-09 19:28:47 -0500
+
+ActionController::RoutingError (uninitialized constant AchievementsController):
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `const_get'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `block in constantize'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `each'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `inject'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `constantize'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:59:in `controller'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:38:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call'
+  activerecord (4.2.0) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:22:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_route.html.erb (2.4ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_table.html.erb (1.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (115.8ms)
+
+
+Started GET "/achievements/new" for ::1 at 2015-02-09 19:28:47 -0500
+
+ActionController::RoutingError (uninitialized constant AchievementsController):
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `const_get'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `block in constantize'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `each'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `inject'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `constantize'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:59:in `controller'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:38:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call'
+  activerecord (4.2.0) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:22:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_route.html.erb (2.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_table.html.erb (1.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (96.5ms)
+
+
+Started GET "/achievements/new" for ::1 at 2015-02-09 19:28:59 -0500
+
+ActionController::RoutingError (uninitialized constant AchievementsController):
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `const_get'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `block in constantize'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `each'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `inject'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `constantize'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:59:in `controller'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:38:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call'
+  activerecord (4.2.0) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:22:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_route.html.erb (2.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_table.html.erb (1.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.8ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (93.2ms)
+
+
+Started GET "/achievements/new" for ::1 at 2015-02-09 19:28:59 -0500
+
+ActionController::RoutingError (uninitialized constant AchievementsController):
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `const_get'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `block in constantize'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `each'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `inject'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `constantize'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:59:in `controller'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:38:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call'
+  activerecord (4.2.0) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:22:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_route.html.erb (3.5ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_table.html.erb (1.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (103.7ms)
+
+
+Started GET "/achievements/2/edit" for ::1 at 2015-02-09 19:29:03 -0500
+
+ActionController::RoutingError (uninitialized constant AchievementsController):
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `const_get'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `block in constantize'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `each'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `inject'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `constantize'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:59:in `controller'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:38:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call'
+  activerecord (4.2.0) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:22:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_route.html.erb (4.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_table.html.erb (1.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (116.4ms)
+
+
+Started GET "/achievements/2/edit" for ::1 at 2015-02-09 19:29:03 -0500
+
+ActionController::RoutingError (uninitialized constant AchievementsController):
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `const_get'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:261:in `block in constantize'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `each'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `inject'
+  activesupport (4.2.0) lib/active_support/inflector/methods.rb:259:in `constantize'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:69:in `controller_reference'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:59:in `controller'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:38:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call'
+  activerecord (4.2.0) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:22:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_route.html.erb (3.2ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/routes/_table.html.erb (1.7ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (0.9ms)
+  Rendered /Users/Fallamander/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (102.3ms)

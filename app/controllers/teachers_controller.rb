@@ -4,12 +4,17 @@ class TeachersController < ApplicationController
 
   def index
     @teachers = Teacher.all
-    @grades = Grade.all
+
+    @teachers_students = Student.where(teacher_id: session[:teacher_id] )
+    # @teachers_students = Student.get_all_children_for_teacher_id( session[:teacher_id] )
+    
+    @achievements = Achievement.all
+    # @achievements = Achievement.get_assignments_for_student_email( student.student_email )
   end
 
   def new
     @teacher = Teacher.new
-    @grade = Grade.new
+    @achievements = Achievement.new
   end
 
   def edit
@@ -46,10 +51,9 @@ class TeachersController < ApplicationController
     redirect_to login_login_path unless session[:teacher_id]
   end
 
-  private
+
   def teacher_params
     params.require(:teacher).permit(:name, :email, :password)
   end
-
 
 end

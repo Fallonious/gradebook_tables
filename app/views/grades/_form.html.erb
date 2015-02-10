@@ -1,17 +1,17 @@
-<%= form_for(@grade) do |f| %>
-  <% if @grade.errors.any? %>
+<%= form_for(@achievement) do |f| %>
+  <% if @achievement.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@grade.errors.count, "error") %> prohibited this item from being saved:</h2>
+    <h2><%= pluralize(@achievement.errors.count, "error") %> prohibited this item from being saved:</h2>
 
     <ul>
-      <% @grade.errors.full_messages.each do |message| %>
+      <% @achievement.errors.full_messages.each do |message| %>
       <li><%= message %></li>
       <% end %>
     </ul>
   </div>
   <% end %>
   <div class="field">
-    <%= f.label "Grade for:" %><br>
+    <%= f.label "Achievement for:" %><br>
     <%= f.select :student_email, options_for_select(Student.get_all_children_email_pairs), include_blank: true %>
   </div>
 
@@ -20,8 +20,8 @@
     <%= f.text_field :assignment_name %>
   </div>
   <div class="field">
-    <%= f.label :due_on %><br>
-    <%= f.date_field :due_on %>
+    <%= f.label :date_on %><br>
+    <%= f.date_field :date_on %>
   </div>
   <div class="field">
     <%= f.label :score %><br>
@@ -31,6 +31,6 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-  <%= link_to 'Delete this item', @grade, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= link_to 'Delete this item', @achievement, method: :delete, data: { confirm: 'Are you sure?' } %>
 
   <% end %>
